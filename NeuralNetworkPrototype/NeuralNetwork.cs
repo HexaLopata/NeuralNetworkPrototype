@@ -75,7 +75,7 @@ namespace NeuralNetworkPrototype
             {
                 layers[layers.Count - 1].neurons[i].BackPropagation(expected,true);
                 var q = layers[layers.Count - 1].neurons[i] as HiddenAndOutputNeuron;
-                Console.WriteLine(q.Error);
+                Console.WriteLine("Error: " + q.Error);
             }
 
                 for (int numbeOfhiddenLayer = layers.Count - 2; numbeOfhiddenLayer > 0; numbeOfhiddenLayer--) // Каждый слой справа налево

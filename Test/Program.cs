@@ -12,12 +12,12 @@ namespace Test
         static void Main()
         {
 
-            double[] input = new double[] { 0, 1, 1, 0 };
-            double[][] output = new double[4][];
-            output[0] = new double[] { 0, 0, 1 };
-            output[1] = new double[] { 1, 1, 1 };
-            output[2] = new double[] { 1, 0, 1 };
-            output[3] = new double[] { 0, 1, 1 };
+            double[] output = new double[] { 0, 1, 1, 0 };
+            double[][] input = new double[4][];
+            input[0] = new double[] { 0, 0, 1 };
+            input[1] = new double[] { 1, 1, 1 };
+            input[2] = new double[] { 1, 0, 1 };
+            input[3] = new double[] { 0, 1, 1 };
 
             Topology topology = new Topology(ActivationFuncType.Sigmoid, 3, 1, 1);
             NeuralNetwork neuralNetwork = new NeuralNetwork(topology, true);
@@ -26,8 +26,8 @@ namespace Test
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    neuralNetwork.Use(output[i]);
-                    neuralNetwork.Learn(0.01, input[i]);
+                    neuralNetwork.Use(input[i]);
+                    neuralNetwork.Learn(0.01, output[i]);
                 }
             }
             for (int i = 0; i < topology.OutputCount; i++)
