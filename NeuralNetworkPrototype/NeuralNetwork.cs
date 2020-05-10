@@ -63,17 +63,17 @@ namespace NeuralNetworkPrototype
             }
         }
 
-        public void Learn(double learningrate, double expected)
+        public void Learn(double learningrate, params double[] expected)
         {
             Backpropagation(expected); // Вычисляет все ошибки
             WeightsAdjustment(learningrate); // Правит все веса 
         }
 
-        private void Backpropagation(double expected)
+        private void Backpropagation(params double[] expected)
         {
             for(int i = 0; i < layers[layers.Count - 1].size; i++)
             {
-                layers[layers.Count - 1].neurons[i].BackPropagation(expected,true);
+                layers[layers.Count - 1].neurons[i].BackPropagation(expected[i],true);
                 var q = layers[layers.Count - 1].neurons[i] as HiddenAndOutputNeuron;
                 Console.WriteLine("Error: " + q.Error);
             }
@@ -82,12 +82,12 @@ namespace NeuralNetworkPrototype
                 {
                     for (int numberOfNeuron = 0; numberOfNeuron < layers[numbeOfhiddenLayer].size; numberOfNeuron++) // Номер нейрона
                     {
+                        double error = 0;
                         for (int numberOfNeuronInNextLayer = 0; numberOfNeuronInNextLayer < layers[numbeOfhiddenLayer + 1].size; numberOfNeuronInNextLayer++) // Каждый нейрон следующешл слоя
                         {
                             var nextlayerneuron = layers[numbeOfhiddenLayer + 1].neurons[numberOfNeuronInNextLayer] as HiddenAndOutputNeuron;
                             if (nextlayerneuron != null)
                             {
-                                double error = 0;
                                 error += nextlayerneuron.Error * nextlayerneuron.Weights[numberOfNeuron];
                                 layers[numbeOfhiddenLayer].neurons[numberOfNeuron].BackPropagation(error, false);
                             }
